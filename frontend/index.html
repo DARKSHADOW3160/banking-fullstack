@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System - Login</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="card login-card">
+            <div class="card-header text-center">
+                <i class="fas fa-university fa-3x mb-3"></i>
+                <h3>Banking System</h3>
+                <p class="text-muted">Secure Login</p>
+            </div>
+            <div class="card-body p-4">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> Account Number
+                        </label>
+                        <input type="text" class="form-control" id="accountNumber" placeholder="Enter account number" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="fas fa-lock"></i> PIN
+                        </label>
+                        <input type="password" class="form-control" id="pin" placeholder="Enter 4-digit PIN" maxlength="4" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 btn-custom" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                
+                <hr class="my-4">
+                
+                <div class="demo-accounts">
+                    <h6 class="text-center mb-3">Demo Accounts</h6>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>PIN</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ACC1001</strong></td>
+                                    <td>1234</td>
+                                    <td>₹50,000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ACC1002</strong></td>
+                                    <td>5678</td>
+                                    <td>₹75,000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ACC1003</strong></td>
+                                    <td>9999</td>
+                                    <td>₹30,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification">
+        <div class="toast-content">
+            <i id="toastIcon" class="fas fa-check-circle"></i>
+            <span id="toastMessage">Message</span>
+        </div>
+    </div>
+
+    <script>
+        // API Base URL
+        const API_URL = 'http://localhost:3000/api';
+
+        // Login Form Handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const accountNumber = document.getElementById('accountNumber').value;
+            const pin = document.getElementById('pin').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Disable button
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            
+            try {
+                const response = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        accountNumber: accountNumber,
+                        pin: pin
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Save account data to localStorage
+                    localStorage.setItem('accountData', JSON.stringify(result.data));
+                    
+                    // Show success message
+                    showToast('Login successful! Redirecting...', 'success');
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1000);
+                } else {
+                    showToast(result.message, 'error');
+                    loginBtn.disabled = false;
+                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showToast('Server connection error. Please check if backend is running.', 'error');
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+            }
+        });
+
+        // Toast Notification Function
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            
+            if (type === 'success') {
+                toast.classList.add('success');
+                toast.classList.remove('error');
+                toastIcon.className = 'fas fa-check-circle';
+            } else {
+                toast.classList.add('error');
+                toast.classList.remove('success');
+                toastIcon.className = 'fas fa-exclamation-circle';
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Check if already logged in
+        window.addEventListener('load', () => {
+            const accountData = localStorage.getItem('accountData');
+            if (accountData) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

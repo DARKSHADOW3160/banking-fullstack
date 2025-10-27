@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System - Dashboard</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">
+                <i class="fas fa-university"></i> Banking System
+            </span>
+            <button class="btn btn-light btn-sm" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Account Info Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card account-info-card">
+                    <div class="card-body text-center text-white">
+                        <div class="account-icon mb-3">
+                            <i class="fas fa-user-circle fa-4x"></i>
+                        </div>
+                        <h4 id="accountHolderName">Loading...</h4>
+                        <p class="mb-1">
+                            <small>Account: <strong id="accountNumber">-</strong></small>
+                        </p>
+                        <p class="mb-1">
+                            <small>Type: <strong id="accountType">-</strong></small>
+                        </p>
+                        <hr class="my-3" style="border-color: rgba(255,255,255,0.3);">
+                        <div class="balance-display">
+                            <h6>Available Balance</h6>
+                            <h2 class="mb-0">₹<span id="accountBalance">0.00</span></h2>
+                        </div>
+                        <button class="btn btn-light btn-sm mt-3" onclick="refreshBalance()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-bolt"></i> Quick Actions
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <button class="btn btn-success w-100" onclick="showSection('deposit')">
+                                    <i class="fas fa-plus-circle"></i><br>
+                                    <small>Deposit</small>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-warning w-100" onclick="showSection('withdraw')">
+                                    <i class="fas fa-minus-circle"></i><br>
+                                    <small>Withdraw</small>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-primary w-100" onclick="showSection('transfer')">
+                                    <i class="fas fa-exchange-alt"></i><br>
+                                    <small>Transfer</small>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-info w-100" onclick="showSection('history')">
+                                    <i class="fas fa-history"></i><br>
+                                    <small>History</small>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="col-md-8">
+                <!-- Deposit Section -->
+                <div id="depositSection" class="card mb-3" style="display: none;">
+                    <div class="card-header bg-success text-white">
+                        <i class="fas fa-plus-circle"></i> Deposit Money
+                    </div>
+                    <div class="card-body">
+                        <form id="depositForm">
+                            <div class="mb-3">
+                                <label class="form-label">Amount (₹)</label>
+                                <input type="number" class="form-control" id="depositAmount" placeholder="Enter amount" min="1" step="0.01" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Remarks (Optional)</label>
+                                <input type="text" class="form-control" id="depositRemarks" placeholder="e.g., Salary, Gift">
+                            </div>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-check"></i> Deposit Money
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Withdraw Section -->
+                <div id="withdrawSection" class="card mb-3" style="display: none;">
+                    <div class="card-header bg-warning text-dark">
+                        <i class="fas fa-minus-circle"></i> Withdraw Money
+                    </div>
+                    <div class="card-body">
+                        <form id="withdrawForm">
+                            <div class="mb-3">
+                                <label class="form-label">Amount (₹)</label>
+                                <input type="number" class="form-control" id="withdrawAmount" placeholder="Enter amount" min="1" step="0.01" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Remarks (Optional)</label>
+                                <input type="text" class="form-control" id="withdrawRemarks" placeholder="e.g., ATM, Shopping">
+                            </div>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-check"></i> Withdraw Money
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Transfer Section -->
+                <div id="transferSection" class="card mb-3" style="display: none;">
+                    <div class="card-header bg-primary text-white">
+                        <i class="fas fa-exchange-alt"></i> Fund Transfer
+                    </div>
+                    <div class="card-body">
+                        <form id="transferForm">
+                            <div class="mb-3">
+                                <label class="form-label">To Account Number</label>
+                                <input type="text" class="form-control" id="toAccount" placeholder="Enter recipient account number" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Amount (₹)</label>
+                                <input type="number" class="form-control" id="transferAmount" placeholder="Enter amount" min="1" step="0.01" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Remarks (Optional)</label>
+                                <input type="text" class="form-control" id="transferRemarks" placeholder="e.g., Payment, Gift">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Transfer Money
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Transaction History Section -->
+                <div id="historySection" class="card">
+                    <div class="card-header bg-info text-white">
+                        <i class="fas fa-history"></i> Transaction History
+                        <button class="btn btn-light btn-sm float-end" onclick="loadTransactions()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="transactionsList">
+                            <div class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-muted">Loading transactions...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast-notification">
+        <div class="toast-content">
+            <i id="toastIcon" class="fas fa-check-circle"></i>
+            <span id="toastMessage">Message</span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="text-light mt-3">Processing...</p>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
