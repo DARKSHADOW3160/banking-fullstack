@@ -35,6 +35,7 @@ This project demonstrates core concepts of **full-stack development**, including
 2.Go to project folder: cd banking-fullstack
 3.Install dependencies: npm install
 4.Start the backend server: npm start
+
 Open frontend/index.html in browser or use Live Server.
 
 👨‍💻 Author
