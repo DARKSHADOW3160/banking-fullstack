@@ -23,7 +23,6 @@ User Features
 ## 🧰 Tech Stack
 
 **Frontend:** HTML, CSS, JavaScript, Bootstrap 5 - Responsive UI framework, Font Awesome - Icons
-
 **Backend:** Node.js, Express.js  
 **Database:** MySQL  
 **Server:** XAMPP / Localhost  
@@ -36,17 +35,17 @@ User Features
 1. Clone the repo:
    ```bash
    git clone https://github.com/DARKSHADOW3160/banking-fullstack.git
-2.Go to project folder: cd banking-fullstack
-3.Install dependencies: npm install
-4.Start the backend server: npm start
+2. Go to project folder: cd banking-fullstack
+3. Install dependencies: npm install
+4. Start the backend server: npm start
 
 Open frontend/index.html in browser or use Live Server.
 
 ---
 
-##👨‍💻 Author
+## 👨‍💻 Author
 
-Name: Aftab Tamboli
-GitHub: @DARKSHADOW3160
-LinkedIn: https://www.linkedin.com/in/aftab-tamboli-5318801b6
-Email: aftabt951@gmail.com
+- Name: Aftab Tamboli 
+- GitHub: @DARKSHADOW3160 
+- LinkedIn: https://www.linkedin.com/in/aftab-tamboli-5318801b6
+- Email: aftabt951@gmail.com
