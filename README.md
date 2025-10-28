@@ -23,6 +23,7 @@ User Features
 ## 🧰 Tech Stack
 
 **Frontend:** HTML, CSS, JavaScript, Bootstrap 5 - Responsive UI framework, Font Awesome - Icons
+
 **Backend:** Node.js, Express.js  
 **Database:** MySQL  
 **Server:** XAMPP / Localhost  
@@ -41,8 +42,9 @@ User Features
 
 Open frontend/index.html in browser or use Live Server.
 
+---
 
-👨‍💻 Author
+##👨‍💻 Author
 
 Name: Aftab Tamboli
 GitHub: @DARKSHADOW3160
