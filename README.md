@@ -41,43 +41,6 @@ User Features
 
 Open frontend/index.html in browser or use Live Server.
 
-📂 Project Structure
-banking-fullstack/
-│
-├── frontend/
-│   ├── index.html              # Login page
-│   ├── dashboard.html          # Main dashboard
-│   ├── css/
-│   │   └── style.css          # Custom styles
-│   └── js/
-│       └── app.js             # Frontend logic
-│
-├── backend/
-│   ├── server.js              # Express server
-│   ├── package.json           # Dependencies
-│   └── .env                   # Environment variables
-│
-├── database/
-│   └── banking.sql            # Database schema
-│
-└── README.md
-
-🔮 Future Enhancements
-
- JWT-based authentication
- OTP verification for transactions
- Email notifications
- PDF statement generation
- Transaction filters (date range, type)
- Account statement download
- Multi-currency support
- Loan management module
- Credit/Debit card management
- Admin dashboard
- Password reset functionality
- Two-factor authentication (2FA)
- Real-time notifications using WebSockets
- Mobile app (React Native)
 
 👨‍💻 Author
 
