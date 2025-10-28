@@ -9,24 +9,24 @@ This project demonstrates core concepts of **full-stack development**, including
 
 User Features
 
-🔐 Secure Login - PIN-based authentication system
-💰 Account Dashboard - View account details and balance
-💵 Deposit Money - Add funds to account with remarks
-💸 Withdraw Money - Withdraw funds with balance validation
-🔄 Fund Transfer - Transfer money between accounts
-📊 Transaction History - View all past transactions with details
-🔄 Real-time Balance Updates - Instant balance refresh
-📱 Responsive Design - Works on desktop, tablet, and mobile
+- 🔐 Secure Login - PIN-based authentication system
+- 💰 Account Dashboard - View account details and balance
+- 💵 Deposit Money - Add funds to account with remarks
+- 💸 Withdraw Money - Withdraw funds with balance validation
+- 🔄 Fund Transfer - Transfer money between accounts
+- 📊 Transaction History - View all past transactions with details
+- 🔄 Real-time Balance Updates - Instant balance refresh
+- 📱 Responsive Design - Works on desktop, tablet, and mobile
 
 ---
 
 ## 🧰 Tech Stack
 
-**Frontend:** HTML, CSS, JavaScript, Bootstrap 5 - Responsive UI framework, Font Awesome - Icons
-**Backend:** Node.js, Express.js  
-**Database:** MySQL  
-**Server:** XAMPP / Localhost  
-**Version Control:** Git & GitHub
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap 5 - Responsive UI framework, Font Awesome - Icons
+- **Backend:** Node.js, Express.js  
+- **Database:** MySQL  
+- **Server:** XAMPP / Localhost  
+- **Version Control:** Git & GitHub
 
 ---
 
